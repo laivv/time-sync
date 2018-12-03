@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Reflection;
 
-namespace WindowsFormsApplication2
+namespace timesync
 {
     public partial class Form5 : Form
     {

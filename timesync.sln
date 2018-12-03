@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "timesync", "WindowsFormsApplication2\timesync.csproj", "{B13BCEA3-2833-4A95-9C9A-E0109FA00339}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "timesync", "timesync\timesync.csproj", "{B13BCEA3-2833-4A95-9C9A-E0109FA00339}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace WindowsFormsApplication2
+namespace timesync
 {
     static class Program
     {

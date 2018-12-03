@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
-using System.Xml;
 using System.IO;
 using Microsoft.Win32;
 using System.Net;
@@ -11,7 +10,7 @@ using System.Threading;
 using System.Runtime.InteropServices;
 
 
-namespace WindowsFormsApplication2
+namespace timesync
 {
 
 

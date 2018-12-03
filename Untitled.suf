@@ -6,9 +6,9 @@
 <ArchiveFiles>
 <FileData>
 <FldRef>0</FldRef>
-<FullName>D:\Documents\Visual Studio 2010\Projects\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe</FullName>
-<FileName>WindowsFormsApplication2.exe</FileName>
-<Source>D:\Documents\Visual Studio 2010\Projects\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug</Source>
+<FullName>D:\Documents\Visual Studio 2010\Projects\timesync\timesync\bin\Debug\timesync.exe</FullName>
+<FileName>timesync.exe</FileName>
+<Source>D:\Documents\Visual Studio 2010\Projects\timesync\timesync\bin\Debug</Source>
 <Ext>exe</Ext>
 <RTSource>Archive</RTSource>
 <Desc/>
@@ -27,7 +27,7 @@
 <SCQLaunch>0</SCQLaunch>
 <SCCust>0</SCCust>
 <CustSCPath/>
-<SCDesc>¶¨Ê±¹Ø»ú</SCDesc>
+<SCDesc>ï¿½ï¿½Ê±ï¿½Ø»ï¿½</SCDesc>
 <SCComment/>
 <SCArgs/>
 <SCWork/>
@@ -74,9 +74,9 @@
 </FileData>
 <FileData>
 <FldRef>0</FldRef>
-<FullName>D:\Documents\Visual Studio 2010\Projects\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\aaa.ico</FullName>
+<FullName>D:\Documents\Visual Studio 2010\Projects\timesync\timesync\bin\Debug\aaa.ico</FullName>
 <FileName>aaa.ico</FileName>
-<Source>D:\Documents\Visual Studio 2010\Projects\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug</Source>
+<Source>D:\Documents\Visual Studio 2010\Projects\timesync\timesync\bin\Debug</Source>
 <Ext>ico</Ext>
 <RTSource>Archive</RTSource>
 <Desc/>
@@ -417,16 +417,16 @@ Otherwise, click Next to continue.
 </Secondary>
 </Language>
 <Messages>
-<IDS_WINDOW_TITLE>%ProductName% °²×°³ÌÐò</IDS_WINDOW_TITLE>
-<IDS_HEADER_TEXT>»¶Ó­</IDS_HEADER_TEXT>
-<IDS_SUBHEADER_TEXT>»¶Ó­Ê¹ÓÃ %ProductName% %ProductVer% °²×°³ÌÐò</IDS_SUBHEADER_TEXT>
-<IDS_CTRL_BUTTON_NEXT>ÏÂÒ»²½(&amp;N) &gt;</IDS_CTRL_BUTTON_NEXT>
-<IDS_CTRL_BUTTON_BACK>&lt; ·µ»Ø(&amp;B)</IDS_CTRL_BUTTON_BACK>
-<IDS_CTRL_BUTTON_CANCEL>È¡Ïû(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
-<IDS_CTRL_BUTTON_HELP>°ïÖú(&amp;H)</IDS_CTRL_BUTTON_HELP>
-<IDS_CTRL_STATICTEXT_BODY>Çëµ¥»÷¡°ÏÂÒ»²½¡±¼ÌÐø¡£
+<IDS_WINDOW_TITLE>%ProductName% ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½</IDS_WINDOW_TITLE>
+<IDS_HEADER_TEXT>ï¿½ï¿½Ó­</IDS_HEADER_TEXT>
+<IDS_SUBHEADER_TEXT>ï¿½ï¿½Ó­Ê¹ï¿½ï¿½ %ProductName% %ProductVer% ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½</IDS_SUBHEADER_TEXT>
+<IDS_CTRL_BUTTON_NEXT>ï¿½ï¿½Ò»ï¿½ï¿½(&amp;N) &gt;</IDS_CTRL_BUTTON_NEXT>
+<IDS_CTRL_BUTTON_BACK>&lt; ï¿½ï¿½ï¿½ï¿½(&amp;B)</IDS_CTRL_BUTTON_BACK>
+<IDS_CTRL_BUTTON_CANCEL>È¡ï¿½ï¿½(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
+<IDS_CTRL_BUTTON_HELP>ï¿½ï¿½ï¿½ï¿½(&amp;H)</IDS_CTRL_BUTTON_HELP>
+<IDS_CTRL_STATICTEXT_BODY>ï¿½ëµ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 </IDS_CTRL_STATICTEXT_BODY>
-<IDS_CTRL_HEADINGTEXT_BODY>»¶Ó­Ê¹ÓÃ %ProductName% %ProductVer% °²×°³ÌÐò¡£</IDS_CTRL_HEADINGTEXT_BODY>
+<IDS_CTRL_HEADINGTEXT_BODY>ï¿½ï¿½Ó­Ê¹ï¿½ï¿½ %ProductName% %ProductVer% ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½</IDS_CTRL_HEADINGTEXT_BODY>
 </Messages>
 </SUF70Messages>
 </Languages>
@@ -737,16 +737,16 @@ end
 </Secondary>
 </Language>
 <Messages>
-<IDS_WINDOW_TITLE>%ProductName% °²×°³ÌÐò</IDS_WINDOW_TITLE>
-<IDS_HEADER_TEXT>Ðí¿ÉÐ­Òé</IDS_HEADER_TEXT>
-<IDS_SUBHEADER_TEXT>Çë×ÐÏ¸ÔÄ¶ÁÒÔÏÂÐí¿ÉÐ­Òé¡£</IDS_SUBHEADER_TEXT>
-<IDS_CTRL_BUTTON_NEXT>ÏÂÒ»²½(&amp;N) &gt;</IDS_CTRL_BUTTON_NEXT>
-<IDS_CTRL_BUTTON_BACK>&lt; ·µ»Ø(&amp;B)</IDS_CTRL_BUTTON_BACK>
-<IDS_CTRL_BUTTON_CANCEL>È¡Ïû(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
-<IDS_CTRL_BUTTON_HELP>°ïÖú(&amp;H)</IDS_CTRL_BUTTON_HELP>
-<IDS_CTRL_SCROLLTEXT_BODY>½ö¹©Ñ§Ï°£¬ÇëÎðÓÃÓÚÉÌÒµÓÃÍ¾</IDS_CTRL_SCROLLTEXT_BODY>
-<IDS_CTRL_RADIOBTN_AGREE>ÎÒÍ¬Òâ¸ÃÐí¿ÉÐ­ÒéµÄÌõ¿î</IDS_CTRL_RADIOBTN_AGREE>
-<IDS_CTRL_RADIOBTN_DISAGREE>ÎÒ²»Í¬Òâ¸ÃÐí¿ÉÐ­ÒéµÄÌõ¿î</IDS_CTRL_RADIOBTN_DISAGREE>
+<IDS_WINDOW_TITLE>%ProductName% ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½</IDS_WINDOW_TITLE>
+<IDS_HEADER_TEXT>ï¿½ï¿½ï¿½Ð­ï¿½ï¿½</IDS_HEADER_TEXT>
+<IDS_SUBHEADER_TEXT>ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½é¡£</IDS_SUBHEADER_TEXT>
+<IDS_CTRL_BUTTON_NEXT>ï¿½ï¿½Ò»ï¿½ï¿½(&amp;N) &gt;</IDS_CTRL_BUTTON_NEXT>
+<IDS_CTRL_BUTTON_BACK>&lt; ï¿½ï¿½ï¿½ï¿½(&amp;B)</IDS_CTRL_BUTTON_BACK>
+<IDS_CTRL_BUTTON_CANCEL>È¡ï¿½ï¿½(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
+<IDS_CTRL_BUTTON_HELP>ï¿½ï¿½ï¿½ï¿½(&amp;H)</IDS_CTRL_BUTTON_HELP>
+<IDS_CTRL_SCROLLTEXT_BODY>ï¿½ï¿½ï¿½ï¿½Ñ§Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½Í¾</IDS_CTRL_SCROLLTEXT_BODY>
+<IDS_CTRL_RADIOBTN_AGREE>ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</IDS_CTRL_RADIOBTN_AGREE>
+<IDS_CTRL_RADIOBTN_DISAGREE>ï¿½Ò²ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</IDS_CTRL_RADIOBTN_DISAGREE>
 <IDS_CTRL_SCROLLTEXT_FILE/>
 </Messages>
 </SUF70Messages>
@@ -1157,19 +1157,19 @@ end
 </Secondary>
 </Language>
 <Messages>
-<IDS_WINDOW_TITLE>%ProductName% °²×°³ÌÐò</IDS_WINDOW_TITLE>
-<IDS_HEADER_TEXT>°²×°ÎÄ¼þ¼Ð</IDS_HEADER_TEXT>
-<IDS_SUBHEADER_TEXT>ÄúÏë½« %ProductName% °²×°µ½ºÎ´¦£¿</IDS_SUBHEADER_TEXT>
-<IDS_CTRL_BUTTON_NEXT>ÏÂÒ»²½(&amp;N) &gt;</IDS_CTRL_BUTTON_NEXT>
-<IDS_CTRL_BUTTON_BACK>&lt; ·µ»Ø(&amp;B)</IDS_CTRL_BUTTON_BACK>
-<IDS_CTRL_BUTTON_CANCEL>È¡Ïû(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
-<IDS_CTRL_BUTTON_HELP>°ïÖú(&amp;H)</IDS_CTRL_BUTTON_HELP>
-<IDS_CTRL_BUTTON_BROWSE>¸ü¸Ä(&amp;H)...</IDS_CTRL_BUTTON_BROWSE>
+<IDS_WINDOW_TITLE>%ProductName% ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½</IDS_WINDOW_TITLE>
+<IDS_HEADER_TEXT>ï¿½ï¿½×°ï¿½Ä¼ï¿½ï¿½ï¿½</IDS_HEADER_TEXT>
+<IDS_SUBHEADER_TEXT>ï¿½ï¿½ï¿½ë½« %ProductName% ï¿½ï¿½×°ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½</IDS_SUBHEADER_TEXT>
+<IDS_CTRL_BUTTON_NEXT>ï¿½ï¿½Ò»ï¿½ï¿½(&amp;N) &gt;</IDS_CTRL_BUTTON_NEXT>
+<IDS_CTRL_BUTTON_BACK>&lt; ï¿½ï¿½ï¿½ï¿½(&amp;B)</IDS_CTRL_BUTTON_BACK>
+<IDS_CTRL_BUTTON_CANCEL>È¡ï¿½ï¿½(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
+<IDS_CTRL_BUTTON_HELP>ï¿½ï¿½ï¿½ï¿½(&amp;H)</IDS_CTRL_BUTTON_HELP>
+<IDS_CTRL_BUTTON_BROWSE>ï¿½ï¿½ï¿½ï¿½(&amp;H)...</IDS_CTRL_BUTTON_BROWSE>
 <IDS_CTRL_EDIT_FOLDER>%AppFolder%</IDS_CTRL_EDIT_FOLDER>
-<IDS_CTRL_STATICTEXT_TOPINSTRUCTIONS>Èí¼þ½«±»°²×°µ½ÒÔÏÂÁÐ³öµÄÎÄ¼þ¼ÐÖÐ¡£ÒªÑ¡Ôñ²»Í¬µÄÎ»ÖÃ£¬¼üÈëÐÂµÄÂ·¾¶£¬»òµ¥»÷¡°¸ü¸Ä¡±ä¯ÀÀÏÖÓÐµÄÎÄ¼þ¼Ð¡£</IDS_CTRL_STATICTEXT_TOPINSTRUCTIONS>
-<IDS_CTRL_STATICTEXT_LABEL_01>½« %ProductName% °²×°µ½:</IDS_CTRL_STATICTEXT_LABEL_01>
-<IDS_CTRL_STATICTEXT_SPACEREQUIRED>ËùÐè¿Õ¼ä: %SpaceRequired%</IDS_CTRL_STATICTEXT_SPACEREQUIRED>
-<IDS_CTRL_STATICTEXT_SPACEAVAILABLE>Ñ¡¶¨Çý¶¯Æ÷µÄ¿ÉÓÃ¿Õ¼ä: %SpaceAvailable%</IDS_CTRL_STATICTEXT_SPACEAVAILABLE>
+<IDS_CTRL_STATICTEXT_TOPINSTRUCTIONS>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð³ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ÒªÑ¡ï¿½ï¿½Í¬ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½òµ¥»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½Ä¼ï¿½ï¿½Ð¡ï¿½</IDS_CTRL_STATICTEXT_TOPINSTRUCTIONS>
+<IDS_CTRL_STATICTEXT_LABEL_01>ï¿½ï¿½ %ProductName% ï¿½ï¿½×°ï¿½ï¿½:</IDS_CTRL_STATICTEXT_LABEL_01>
+<IDS_CTRL_STATICTEXT_SPACEREQUIRED>ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½: %SpaceRequired%</IDS_CTRL_STATICTEXT_SPACEREQUIRED>
+<IDS_CTRL_STATICTEXT_SPACEAVAILABLE>Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Ã¿Õ¼ï¿½: %SpaceAvailable%</IDS_CTRL_STATICTEXT_SPACEAVAILABLE>
 </Messages>
 </SUF70Messages>
 </Languages>
@@ -1451,25 +1451,25 @@ Please click Next to proceed with the installation.</IDS_CTRL_STATICTEXT_BODY>
 </Secondary>
 </Language>
 <Messages>
-<IDS_WINDOW_TITLE>%ProductName% °²×°³ÌÐò</IDS_WINDOW_TITLE>
-<IDS_HEADER_TEXT>×¼±¸°²×°</IDS_HEADER_TEXT>
-<IDS_SUBHEADER_TEXT>ÏÖÔÚÄúÕý×¼±¸°²×° %ProductName% %ProductVer%</IDS_SUBHEADER_TEXT>
-<IDS_CTRL_BUTTON_NEXT>ÏÂÒ»²½(&amp;N) &gt;</IDS_CTRL_BUTTON_NEXT>
-<IDS_CTRL_BUTTON_BACK>&lt; ·µ»Ø(&amp;B)</IDS_CTRL_BUTTON_BACK>
-<IDS_CTRL_BUTTON_CANCEL>È¡Ïû(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
-<IDS_CTRL_BUTTON_HELP>°ïÖú(&amp;H)</IDS_CTRL_BUTTON_HELP>
-<IDS_CTRL_STATICTEXT_BODY>ÏÖÔÚ°²×°³ÌÐòÒÑÓÐ×ã¹»µÄÐÅÏ¢½« %ProductName% °²×°µ½ÄúµÄ¼ÆËã»úÖÐ¡£
+<IDS_WINDOW_TITLE>%ProductName% ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½</IDS_WINDOW_TITLE>
+<IDS_HEADER_TEXT>×¼ï¿½ï¿½ï¿½ï¿½×°</IDS_HEADER_TEXT>
+<IDS_SUBHEADER_TEXT>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½×° %ProductName% %ProductVer%</IDS_SUBHEADER_TEXT>
+<IDS_CTRL_BUTTON_NEXT>ï¿½ï¿½Ò»ï¿½ï¿½(&amp;N) &gt;</IDS_CTRL_BUTTON_NEXT>
+<IDS_CTRL_BUTTON_BACK>&lt; ï¿½ï¿½ï¿½ï¿½(&amp;B)</IDS_CTRL_BUTTON_BACK>
+<IDS_CTRL_BUTTON_CANCEL>È¡ï¿½ï¿½(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
+<IDS_CTRL_BUTTON_HELP>ï¿½ï¿½ï¿½ï¿½(&amp;H)</IDS_CTRL_BUTTON_HELP>
+<IDS_CTRL_STATICTEXT_BODY>ï¿½ï¿½ï¿½Ú°ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ %ProductName% ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½
 
 
-½«Ê¹ÓÃÒÔÏÂÉèÖÃ:
+ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:
 
-°²×°ÎÄ¼þ¼Ð:        %AppFolder%
+ï¿½ï¿½×°ï¿½Ä¼ï¿½ï¿½ï¿½:        %AppFolder%
 
-¿ì½Ý·½Ê½ÎÄ¼þ¼Ð:    %AppShortcutFolderName%
+ï¿½ï¿½Ý·ï¿½Ê½ï¿½Ä¼ï¿½ï¿½ï¿½:    %AppShortcutFolderName%
 
 
-Çëµ¥»÷¡°ÏÂÒ»²½¡±¼ÌÐø°²×°¡£</IDS_CTRL_STATICTEXT_BODY>
-<IDS_CTRL_HEADINGTEXT_BODY>±êÌâ</IDS_CTRL_HEADINGTEXT_BODY>
+ï¿½ëµ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×°ï¿½ï¿½</IDS_CTRL_STATICTEXT_BODY>
+<IDS_CTRL_HEADINGTEXT_BODY>ï¿½ï¿½ï¿½ï¿½</IDS_CTRL_HEADINGTEXT_BODY>
 </Messages>
 </SUF70Messages>
 </Languages>
@@ -1783,16 +1783,16 @@ end
 </Secondary>
 </Language>
 <Messages>
-<IDS_WINDOW_TITLE>%ProductName% °²×°³ÌÐò</IDS_WINDOW_TITLE>
-<IDS_HEADER_TEXT>ÕýÔÚ°²×° %ProductName%</IDS_HEADER_TEXT>
-<IDS_SUBHEADER_TEXT>ÇëÉÔºò...</IDS_SUBHEADER_TEXT>
-<IDS_CTRL_BUTTON_CANCEL>È¡Ïû(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
+<IDS_WINDOW_TITLE>%ProductName% ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½</IDS_WINDOW_TITLE>
+<IDS_HEADER_TEXT>ï¿½ï¿½ï¿½Ú°ï¿½×° %ProductName%</IDS_HEADER_TEXT>
+<IDS_SUBHEADER_TEXT>ï¿½ï¿½ï¿½Ôºï¿½...</IDS_SUBHEADER_TEXT>
+<IDS_CTRL_BUTTON_CANCEL>È¡ï¿½ï¿½(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
 <IDS_CTRL_STATICTEXT_TOPINSTRUCTIONS/>
 <IDS_CTRL_STATICTEXT_LABEL_01/>
-<IDS_CTRL_STATICTEXT_LABEL_02>ÕýÔÚ°²×°...</IDS_CTRL_STATICTEXT_LABEL_02>
+<IDS_CTRL_STATICTEXT_LABEL_02>ï¿½ï¿½ï¿½Ú°ï¿½×°...</IDS_CTRL_STATICTEXT_LABEL_02>
 <IDS_CTRL_PROGRESS_BAR_01/>
-<IDS_CTRL_STATICTEXT_LABEL_03>½ø³Ì¶þ</IDS_CTRL_STATICTEXT_LABEL_03>
-<IDS_CTRL_STATICTEXT_LABEL_04>ÕýÔÚÖ´ÐÐ¶¯×÷...</IDS_CTRL_STATICTEXT_LABEL_04>
+<IDS_CTRL_STATICTEXT_LABEL_03>ï¿½ï¿½ï¿½Ì¶ï¿½</IDS_CTRL_STATICTEXT_LABEL_03>
+<IDS_CTRL_STATICTEXT_LABEL_04>ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ð¶ï¿½ï¿½ï¿½...</IDS_CTRL_STATICTEXT_LABEL_04>
 <IDS_CTRL_PROGRESS_BAR_02/>
 </Messages>
 </SUF70Messages>
@@ -2073,20 +2073,20 @@ Please click Finish to exit this installer.
 </Secondary>
 </Language>
 <Messages>
-<IDS_WINDOW_TITLE>%ProductName% °²×°³ÌÐò</IDS_WINDOW_TITLE>
-<IDS_HEADER_TEXT>°²×°ÒÑÍê³É</IDS_HEADER_TEXT>
-<IDS_SUBHEADER_TEXT>°²×°ÒÑ³É¹¦Íê³É¡£</IDS_SUBHEADER_TEXT>
-<IDS_CTRL_BUTTON_NEXT>Íê³É(&amp;F)</IDS_CTRL_BUTTON_NEXT>
-<IDS_CTRL_BUTTON_BACK>&lt; ·µ»Ø(&amp;B)</IDS_CTRL_BUTTON_BACK>
-<IDS_CTRL_BUTTON_CANCEL>È¡Ïû(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
-<IDS_CTRL_BUTTON_HELP>°ïÖú(&amp;H)</IDS_CTRL_BUTTON_HELP>
-<IDS_CTRL_STATICTEXT_BODY>%ProductName% %ProductVer% °²×°ÒÑÍê³É¡£
+<IDS_WINDOW_TITLE>%ProductName% ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½</IDS_WINDOW_TITLE>
+<IDS_HEADER_TEXT>ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½</IDS_HEADER_TEXT>
+<IDS_SUBHEADER_TEXT>ï¿½ï¿½×°ï¿½Ñ³É¹ï¿½ï¿½ï¿½É¡ï¿½</IDS_SUBHEADER_TEXT>
+<IDS_CTRL_BUTTON_NEXT>ï¿½ï¿½ï¿½(&amp;F)</IDS_CTRL_BUTTON_NEXT>
+<IDS_CTRL_BUTTON_BACK>&lt; ï¿½ï¿½ï¿½ï¿½(&amp;B)</IDS_CTRL_BUTTON_BACK>
+<IDS_CTRL_BUTTON_CANCEL>È¡ï¿½ï¿½(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
+<IDS_CTRL_BUTTON_HELP>ï¿½ï¿½ï¿½ï¿½(&amp;H)</IDS_CTRL_BUTTON_HELP>
+<IDS_CTRL_STATICTEXT_BODY>%ProductName% %ProductVer% ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½É¡ï¿½
 
-¸ÐÐ»ÄúÑ¡Ôñ %ProductName%£¡
+ï¿½ï¿½Ð»ï¿½ï¿½Ñ¡ï¿½ï¿½ %ProductName%ï¿½ï¿½
 
-Çëµ¥»÷¡°Íê³É¡±ÍË³ö¸Ã°²×°³ÌÐò¡£
+ï¿½ëµ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¡ï¿½ï¿½Ë³ï¿½ï¿½Ã°ï¿½×°ï¿½ï¿½ï¿½ï¿½
 </IDS_CTRL_STATICTEXT_BODY>
-<IDS_CTRL_HEADINGTEXT_BODY>°²×°³É¹¦</IDS_CTRL_HEADINGTEXT_BODY>
+<IDS_CTRL_HEADINGTEXT_BODY>ï¿½ï¿½×°ï¿½É¹ï¿½</IDS_CTRL_HEADINGTEXT_BODY>
 </Messages>
 </SUF70Messages>
 </Languages>
@@ -2197,7 +2197,7 @@ Please click Finish to exit this installer.
 <CPSIVersionMajor/>
 <CPSIVersionMinor/>
 <CreateAppFldSC>1</CreateAppFldSC>
-<AppFldSCDesc>Ð¶ÔØ%ProductName%</AppFldSCDesc>
+<AppFldSCDesc>Ð¶ï¿½ï¿½%ProductName%</AppFldSCDesc>
 <SCComment>Removes %ProductName% from your computer.</SCComment>
 <UseCustomAppFldSCIcon>0</UseCustomAppFldSCIcon>
 <AppFldCustomIconFN/>
@@ -2480,20 +2480,20 @@ Otherwise, click Next to continue.
 </Secondary>
 </Language>
 <Messages>
-<IDS_WINDOW_TITLE>%ProductName% Ð¶ÔØ³ÌÐò</IDS_WINDOW_TITLE>
-<IDS_HEADER_TEXT>»¶Ó­</IDS_HEADER_TEXT>
-<IDS_SUBHEADER_TEXT>»¶Ó­Ê¹ÓÃ %ProductName% %ProductVer% Ð¶ÔØ³ÌÐò</IDS_SUBHEADER_TEXT>
-<IDS_CTRL_BUTTON_NEXT>ÏÂÒ»²½(&amp;N) &gt;</IDS_CTRL_BUTTON_NEXT>
-<IDS_CTRL_BUTTON_BACK>&lt; ·µ»Ø(&amp;B)</IDS_CTRL_BUTTON_BACK>
-<IDS_CTRL_BUTTON_CANCEL>È¡Ïû(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
-<IDS_CTRL_BUTTON_HELP>°ïÖú(&amp;H)</IDS_CTRL_BUTTON_HELP>
-<IDS_CTRL_STATICTEXT_BODY>¸Ã³ÌÐò½«Ð¶ÔØ %ProductName% %ProductVer%¡£
+<IDS_WINDOW_TITLE>%ProductName% Ð¶ï¿½Ø³ï¿½ï¿½ï¿½</IDS_WINDOW_TITLE>
+<IDS_HEADER_TEXT>ï¿½ï¿½Ó­</IDS_HEADER_TEXT>
+<IDS_SUBHEADER_TEXT>ï¿½ï¿½Ó­Ê¹ï¿½ï¿½ %ProductName% %ProductVer% Ð¶ï¿½Ø³ï¿½ï¿½ï¿½</IDS_SUBHEADER_TEXT>
+<IDS_CTRL_BUTTON_NEXT>ï¿½ï¿½Ò»ï¿½ï¿½(&amp;N) &gt;</IDS_CTRL_BUTTON_NEXT>
+<IDS_CTRL_BUTTON_BACK>&lt; ï¿½ï¿½ï¿½ï¿½(&amp;B)</IDS_CTRL_BUTTON_BACK>
+<IDS_CTRL_BUTTON_CANCEL>È¡ï¿½ï¿½(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
+<IDS_CTRL_BUTTON_HELP>ï¿½ï¿½ï¿½ï¿½(&amp;H)</IDS_CTRL_BUTTON_HELP>
+<IDS_CTRL_STATICTEXT_BODY>ï¿½Ã³ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ %ProductName% %ProductVer%ï¿½ï¿½
 
-Èç¹û %ProductName% µ±Ç°ÕýÔÚÔËÐÐ£¬¼ÌÐøÐ¶ÔØÖ®Ç°Çë½«Æä¹Ø±Õ¡£
+ï¿½ï¿½ï¿½ %ProductName% ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½Ö®Ç°ï¿½ë½«ï¿½ï¿½Ø±Õ¡ï¿½
 
-·ñÔò£¬Çëµ¥»÷¡°ÏÂÒ»²½¡±¼ÌÐø¡£
+ï¿½ï¿½ï¿½ï¿½ï¿½ëµ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 </IDS_CTRL_STATICTEXT_BODY>
-<IDS_CTRL_HEADINGTEXT_BODY>Ð¶ÔØ %ProductName%</IDS_CTRL_HEADINGTEXT_BODY>
+<IDS_CTRL_HEADINGTEXT_BODY>Ð¶ï¿½ï¿½ %ProductName%</IDS_CTRL_HEADINGTEXT_BODY>
 </Messages>
 </SUF70Messages>
 </Languages>
@@ -2801,16 +2801,16 @@ end
 </Secondary>
 </Language>
 <Messages>
-<IDS_WINDOW_TITLE>%ProductName% Ð¶ÔØ³ÌÐò</IDS_WINDOW_TITLE>
-<IDS_HEADER_TEXT>ÕýÔÚÒÆ³ý %ProductName%</IDS_HEADER_TEXT>
-<IDS_SUBHEADER_TEXT>ÇëÉÔºò...</IDS_SUBHEADER_TEXT>
-<IDS_CTRL_BUTTON_CANCEL>È¡Ïû(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
+<IDS_WINDOW_TITLE>%ProductName% Ð¶ï¿½Ø³ï¿½ï¿½ï¿½</IDS_WINDOW_TITLE>
+<IDS_HEADER_TEXT>ï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½ %ProductName%</IDS_HEADER_TEXT>
+<IDS_SUBHEADER_TEXT>ï¿½ï¿½ï¿½Ôºï¿½...</IDS_SUBHEADER_TEXT>
+<IDS_CTRL_BUTTON_CANCEL>È¡ï¿½ï¿½(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
 <IDS_CTRL_STATICTEXT_TOPINSTRUCTIONS/>
 <IDS_CTRL_STATICTEXT_LABEL_01> </IDS_CTRL_STATICTEXT_LABEL_01>
 <IDS_CTRL_STATICTEXT_LABEL_02> </IDS_CTRL_STATICTEXT_LABEL_02>
 <IDS_CTRL_PROGRESS_BAR_01/>
-<IDS_CTRL_STATICTEXT_LABEL_03>½ø³Ì¶þ</IDS_CTRL_STATICTEXT_LABEL_03>
-<IDS_CTRL_STATICTEXT_LABEL_04>ÕýÔÚÖ´ÐÐ¶¯×÷...</IDS_CTRL_STATICTEXT_LABEL_04>
+<IDS_CTRL_STATICTEXT_LABEL_03>ï¿½ï¿½ï¿½Ì¶ï¿½</IDS_CTRL_STATICTEXT_LABEL_03>
+<IDS_CTRL_STATICTEXT_LABEL_04>ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ð¶ï¿½ï¿½ï¿½...</IDS_CTRL_STATICTEXT_LABEL_04>
 <IDS_CTRL_PROGRESS_BAR_02/>
 </Messages>
 </SUF70Messages>
@@ -3089,18 +3089,18 @@ Please click Finish to exit.
 </Secondary>
 </Language>
 <Messages>
-<IDS_WINDOW_TITLE>%ProductName% Ð¶ÔØ³ÌÐò</IDS_WINDOW_TITLE>
-<IDS_HEADER_TEXT>Ð¶ÔØÒÑÍê³É</IDS_HEADER_TEXT>
-<IDS_SUBHEADER_TEXT>Ð¶ÔØÒÑ³É¹¦Íê³É¡£</IDS_SUBHEADER_TEXT>
-<IDS_CTRL_BUTTON_NEXT>Íê³É(&amp;F)</IDS_CTRL_BUTTON_NEXT>
-<IDS_CTRL_BUTTON_BACK>&lt; ·µ»Ø(&amp;B)</IDS_CTRL_BUTTON_BACK>
-<IDS_CTRL_BUTTON_CANCEL>È¡Ïû(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
-<IDS_CTRL_BUTTON_HELP>°ïÖú(&amp;H)</IDS_CTRL_BUTTON_HELP>
-<IDS_CTRL_STATICTEXT_BODY>%ProductName% %ProductVer% ÒÑ±»Ð¶ÔØ¡£
+<IDS_WINDOW_TITLE>%ProductName% Ð¶ï¿½Ø³ï¿½ï¿½ï¿½</IDS_WINDOW_TITLE>
+<IDS_HEADER_TEXT>Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</IDS_HEADER_TEXT>
+<IDS_SUBHEADER_TEXT>Ð¶ï¿½ï¿½ï¿½Ñ³É¹ï¿½ï¿½ï¿½É¡ï¿½</IDS_SUBHEADER_TEXT>
+<IDS_CTRL_BUTTON_NEXT>ï¿½ï¿½ï¿½(&amp;F)</IDS_CTRL_BUTTON_NEXT>
+<IDS_CTRL_BUTTON_BACK>&lt; ï¿½ï¿½ï¿½ï¿½(&amp;B)</IDS_CTRL_BUTTON_BACK>
+<IDS_CTRL_BUTTON_CANCEL>È¡ï¿½ï¿½(&amp;C)</IDS_CTRL_BUTTON_CANCEL>
+<IDS_CTRL_BUTTON_HELP>ï¿½ï¿½ï¿½ï¿½(&amp;H)</IDS_CTRL_BUTTON_HELP>
+<IDS_CTRL_STATICTEXT_BODY>%ProductName% %ProductVer% ï¿½Ñ±ï¿½Ð¶ï¿½Ø¡ï¿½
 
-Çëµ¥»÷¡°Íê³É¡±ÍË³ö¡£
+ï¿½ëµ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¡ï¿½ï¿½Ë³ï¿½ï¿½ï¿½
 </IDS_CTRL_STATICTEXT_BODY>
-<IDS_CTRL_HEADINGTEXT_BODY>Ð¶ÔØ³É¹¦</IDS_CTRL_HEADINGTEXT_BODY>
+<IDS_CTRL_HEADINGTEXT_BODY>Ð¶ï¿½Ø³É¹ï¿½</IDS_CTRL_HEADINGTEXT_BODY>
 </Messages>
 </SUF70Messages>
 </Languages>
@@ -3281,7 +3281,7 @@ g_HandleSystemReboot();
 <ProjFileEmail/>
 <ProjFileCreatedVer>9.1.0.0</ProjFileCreatedVer>
 <ProjFileSavedVer>9.1.0.0</ProjFileSavedVer>
-<BaseFolderArchive>D:\Documents\Visual Studio 2010\Projects\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug</BaseFolderArchive>
+<BaseFolderArchive>D:\Documents\Visual Studio 2010\Projects\timesync\timesync\bin\Debug</BaseFolderArchive>
 <BaseFolderExternal/>
 <UseSkinFile>0</UseSkinFile>
 <SkinFilename/>
@@ -3378,7 +3378,7 @@ g_HandleSystemReboot();
 <SUF7SessionVars>
 <SessionVar>
 <Name>%ProductName%</Name>
-<Value>¶¨Ê±¹Ø»ú</Value>
+<Value>ï¿½ï¿½Ê±ï¿½Ø»ï¿½</Value>
 <Type>1</Type>
 </SessionVar>
 <SessionVar>
@@ -3408,7 +3408,7 @@ g_HandleSystemReboot();
 </SessionVar>
 <SessionVar>
 <Name>%WindowTitleUninstall%</Name>
-<Value>Ð¶ÔØ%ProductName%</Value>
+<Value>Ð¶ï¿½ï¿½%ProductName%</Value>
 <Type>1</Type>
 </SessionVar>
 <SessionVar>
@@ -3453,14 +3453,14 @@ g_HandleSystemReboot();
 <CodeSigningTool>0</CodeSigningTool>
 <Arguments/>
 <UseCustomIcon>1</UseCustomIcon>
-<CustomIconFile>D:\Documents\Visual Studio 2010\Projects\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\aaa.ico</CustomIconFile>
+<CustomIconFile>D:\Documents\Visual Studio 2010\Projects\timesync\timesync\bin\Debug\aaa.ico</CustomIconFile>
 <ResourceFileVersion>1.0</ResourceFileVersion>
 <ResourceProductVersion>1.0</ResourceProductVersion>
 <ResourceCompanyName></ResourceCompanyName>
 <ResourceProductName/>
 <ResourceComments/>
 <ResourceInternalName/>
-<ResourceFileDescription>¶¨Ê±¹Ø»ú</ResourceFileDescription>
+<ResourceFileDescription>ï¿½ï¿½Ê±ï¿½Ø»ï¿½</ResourceFileDescription>
 <ResourceCopyright/>
 <ResourceTrademarks></ResourceTrademarks>
 <ResourcePrivateBuild/>

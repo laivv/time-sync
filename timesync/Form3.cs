@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
 
-namespace WindowsFormsApplication2
+namespace timesync
 {
     public partial class Form3 : Form
     {

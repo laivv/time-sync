@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.IO;
 
-namespace WindowsFormsApplication2
+namespace timesync
 {
     public class INIClass
     {

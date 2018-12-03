@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication2
+﻿namespace timesync
 {
     partial class Form3
     {
