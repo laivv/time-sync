@@ -37,6 +37,17 @@ namespace timesync {
                 LocationY = this.Location.Y;
             }
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void panel3_MouseUp (object sender, MouseEventArgs e) {
             isMouseDown = false;
         }

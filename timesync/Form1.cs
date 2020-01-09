@@ -458,6 +458,10 @@ namespace timesync {
             mThread.Start ();
         }
         private void button1_Click (object sender, EventArgs e) {
+            if (isDelay)
+            {
+                return;
+            }
             setWebTimeTextLoading ();
             setWebTimeAsync ();
         }
