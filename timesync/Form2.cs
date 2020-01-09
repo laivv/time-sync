@@ -12,7 +12,7 @@ namespace timesync {
             InitializeComponent ();
         }
         private void linkLabel1_LinkClicked (object sender, LinkLabelLinkClickedEventArgs e) {
-            System.Diagnostics.Process.Start ("http://www.ilaiv.com");
+            System.Diagnostics.Process.Start ("http://www.ilaiv.com/timesync?v=1.1");
         }
         private void button1_Click (object sender, EventArgs e) {
             this.Close ();
