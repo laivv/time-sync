@@ -11,9 +11,9 @@ namespace timesync {
         /// </summary>
         [STAThread]
         static void Main (string[] args) {
-            bool canRun = false;
-            System.Threading.Mutex mutex = new System.Threading.Mutex (true, "laiweishutdownapplication", out canRun);
-            if (canRun) {
+            bool runable = false;
+            System.Threading.Mutex mutex = new System.Threading.Mutex (true, "lingluo-time-sync-2020-01-08-win32", out runable);
+            if (runable) {
                 Application.EnableVisualStyles ();
                 Application.SetCompatibleTextRenderingDefault (false);
                 Application.Run (new Form1 (args));

@@ -10,7 +10,9 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 namespace timesync {
     public partial class Form5 : Form {
-        public Form5 () {
+        private Form1 parentForm;
+        public Form5 (Form1 parentForm) {
+            this.parentForm = parentForm;
             InitializeComponent ();
             renderView ();
         }
@@ -55,25 +57,31 @@ namespace timesync {
             string stmp = Assembly.GetExecutingAssembly ().Location;
             stmp = stmp.Substring (0, stmp.LastIndexOf ('\\'));
             INIClass ini = new INIClass (stmp + @"\config.ini");
-            string isConfirm = ini.IniReadValue ("AUTOSYNC", "startsync", "1");
+            string isConfirm = ini.IniReadValue ("AUTOSYNC", "startsync", "0");
             return isConfirm;
         }
+
+        private void readSyncConfig()
+        {
+            string stmp = Assembly.GetExecutingAssembly().Location;
+            stmp = stmp.Substring(0, stmp.LastIndexOf('\\'));
+            INIClass ini = new INIClass(stmp + @"\config.ini");
+            Boolean isAutoSync = ini.IniReadValue("AUTOSYNC", "enable", "1") == "1" ? true : false;
+            decimal interval = int.Parse(ini.IniReadValue("AUTOSYNC", "interval", "5"));
+            checkBox4.Checked = isAutoSync;
+            decimal max = numericUpDown1.Maximum;
+            decimal min = numericUpDown1.Minimum;
+            numericUpDown1.Enabled = isAutoSync;
+            if (interval >= min && interval <= max)
+            {
+                numericUpDown1.Value = interval;
+            }
+        }
         private void renderView () {
-            if (checkAutorunStatus ()) {
-                this.checkBox1.Checked = true;
-            } else {
-                this.checkBox1.Checked = false;
-            }
-            if (INIReader () == "1") {
-                this.checkBox2.Checked = true;
-            } else {
-                this.checkBox2.Checked = false;
-            }
-            if (INIReader2 () == "1") {
-                this.checkBox3.Checked = true;
-            } else {
-                this.checkBox3.Checked = false;
-            }
+            this.checkBox1.Checked = checkAutorunStatus();
+            this.checkBox2.Checked = INIReader() == "1" ? true : false;
+            this.checkBox3.Checked = INIReader2() == "1" ? true : false;
+            readSyncConfig();
         }
         private void button1_Click (object sender, EventArgs e) {
             bool isSaved = true;
@@ -107,6 +115,9 @@ namespace timesync {
             } else {
                 ini.IniWriteValue ("AUTOSYNC", "startsync", "0");
             }
+            saveSyncConfig();
+            saveIntervalConfig();
+            parentForm.runTaskTimer(numericUpDown1.Value, checkBox4.Checked);
             if (!isSaved) {
                 renderView ();
                 MessageBox.Show ("部分设置保存失败！", "保存失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -115,6 +126,33 @@ namespace timesync {
                 this.Close ();
                 this.Dispose ();
             }
+        }
+        private void saveSyncConfig()
+        {
+            string stmp = Assembly.GetExecutingAssembly().Location;
+            stmp = stmp.Substring(0, stmp.LastIndexOf('\\'));
+            INIClass ini = new INIClass(stmp + @"\config.ini");
+            bool confirm = checkBox4.Checked;
+            if (confirm)
+            {
+                ini.IniWriteValue("AUTOSYNC", "enable", "1");
+            }
+            else
+            {
+                ini.IniWriteValue("AUTOSYNC", "enable", "0");
+            }
+        }
+        private void saveIntervalConfig()
+        {
+            string stmp = Assembly.GetExecutingAssembly().Location;
+            stmp = stmp.Substring(0, stmp.LastIndexOf('\\'));
+            INIClass ini = new INIClass(stmp + @"\config.ini");
+            string interval = numericUpDown1.Value.ToString();
+            ini.IniWriteValue("AUTOSYNC", "interval", interval);
+        }
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            numericUpDown1.Enabled = checkBox1.Checked;
         }
         private void pictureBox2_Click (object sender, EventArgs e) {
             this.Close ();
