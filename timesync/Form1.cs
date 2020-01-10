@@ -26,11 +26,11 @@ namespace timesync {
         private bool isDelay = false;
         private TimeSpan mTimeSpan;
         public delegate void Delegator ();
-        public Delegator mMyDelegate;
-        public Delegator mMyDelegateSuccess;
-        public Delegator syncSuccess;
-        public Delegator syncError;
-        public Delegator syncPending;
+        public Delegator invokeWebTimeTextError;
+        public Delegator invokeWebTimeTextSuccess;
+        public Delegator invokeSyncSatusSuccess;
+        public Delegator invokeSyncStatusError;
+        public Delegator invokeSyncStatusPending;
         private System.Timers.Timer taskTimer = new System.Timers.Timer ();
         private string[] ntps = new string[] {
             "ntp1.aliyun.com",
@@ -51,21 +51,20 @@ namespace timesync {
             init (args);
         }
         private void init (string[] args) {
-            
             readSyncConfig();
-            mMyDelegate = new Delegator (setWebTimeTextError);
-            mMyDelegateSuccess = new Delegator (setWebTimeTextSuccess);
-            syncSuccess = new Delegator (setSyncSatusSuccess);
-            syncError = new Delegator (setSyncStatusError);
-            syncPending = new Delegator (setSyncStatusPending);
+            invokeWebTimeTextError = new Delegator (setWebTimeTextError);
+            invokeWebTimeTextSuccess = new Delegator (setWebTimeTextSuccess);
+            invokeSyncSatusSuccess = new Delegator (setSyncSatusSuccess);
+            invokeSyncStatusError = new Delegator (setSyncStatusError);
+            invokeSyncStatusPending = new Delegator (setSyncStatusPending);
             startTimer ();
             if (isStartAutoSyncTimeOnce) {
-                setWebTimeAsync ();
+                setWebTimeAsync (true);
             } else {
-                getWebTimeAsync ();
+                setWebTimeAsync ();
             }
             isStartOnBackEndMode = args.Length > 0;
-            setAutoStart ();
+            createFirstRunFile ();
             initTaskTimer ();
             runTaskTimer(this.syncInterval, this.isAutoSync);
             if (!isDelay)
@@ -111,29 +110,23 @@ namespace timesync {
             taskTimer.SynchronizingObject = this;
         }
         private void taskSyncTime (object sender, System.Timers.ElapsedEventArgs e) {
-            setWebTimeAsync ();
+            setWebTimeAsync (true);
         }
         public void runTaskTimer (decimal syncInterval,bool enable) {
             taskTimer.Interval = (double) (syncInterval * 1000 * 60);
             taskTimer.Enabled = enable;
         }
         public void setSyncSatusSuccess () {
-            //label7.Text = "同步成功";
-            //label7.ForeColor = Color.FromArgb (0, 192, 0);
             label4.Text = "同步成功";
             label3.ForeColor = Color.FromArgb(0, 192, 0);
             label4.ForeColor = Color.FromArgb (0, 192, 0);
         }
         public void setSyncStatusError () {
-            //label7.Text = "同步失败";
-            //label7.ForeColor = Color.Red;
             label4.Text = "同步失败";
             label3.ForeColor = Color.Red;
             label4.ForeColor = Color.Red;
         }
         public void setSyncStatusPending () {
-            //label7.Text = "同步中...";
-            //label7.ForeColor = Color.FromArgb (0, 192, 0);
             label4.Text = "同步中...";
             label3.ForeColor = Color.Gray;
             label4.ForeColor = Color.Gray;
@@ -143,6 +136,32 @@ namespace timesync {
             label2.Text = "获取失败";
             label2.ForeColor = Color.Red;
             label1.ForeColor = Color.Red;
+        }
+
+        public enum FetchState {
+            pending = 1,
+            success = 2,
+            error = 0
+        }
+        public void setFetchState(FetchState state)
+        {
+            if(state == FetchState.pending)
+            {
+                label1.ForeColor = Color.Gray;
+                label2.ForeColor = Color.Gray;
+                label2.Text = "获取中...";
+            }
+            else if(state == FetchState.success)
+            {
+                label1.ForeColor = Color.FromArgb(0, 192, 0);
+                label2.ForeColor = Color.FromArgb(0, 192, 0);
+            }
+            else if(state == FetchState.error)
+            {
+                label2.Text = "获取失败";
+                label2.ForeColor = Color.Red;
+                label1.ForeColor = Color.Red;
+            }
         }
         public void setWebTimeTextSuccess () {
             label1.ForeColor = Color.FromArgb (0, 192, 0);
@@ -202,7 +221,7 @@ namespace timesync {
             stmp = stmp.Substring (0, stmp.LastIndexOf ('\\'));
             INIClass ini = new INIClass (stmp + @"\config.ini");
             if (ini.ExistINIFile ()) {
-                string isConfirm = ini.IniReadValue ("EXIT", "confirm", "1");
+                string isConfirm = ini.IniReadValue ("EXIT", "exitConfirm", "1");
                 if (isConfirm == "1") {
                     Form3 exitForm = new Form3 ();
                     exitForm.ShowDialog (this);
@@ -268,40 +287,58 @@ namespace timesync {
                 //wellcome.ShowDialog();
             }
         }
-        private void openAutoStart (object sender = null, System.Timers.ElapsedEventArgs e = null) {
+  
+
+        private bool setAutoStart(bool start)
+        {
             string appPath = Application.ExecutablePath;
-            string appName = System.IO.Path.GetFileName (appPath);
-            try {
+            string appName = System.IO.Path.GetFileName(appPath);
+            bool success = true;
+            try
+            {
                 RegistryKey rk = Registry.LocalMachine;
-                RegistryKey rk2 = rk.CreateSubKey (@"Software\Microsoft\Windows\CurrentVersion\Run");
-                rk2.SetValue (appName, appPath + " -s");
-                rk2.Close ();
-                rk.Close ();
-            } catch { }
+                RegistryKey rk2 = rk.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run");
+                if (start)
+                {
+                    rk2.SetValue(appName, appPath + " -s");
+                }
+                else
+                {
+                    rk2.DeleteValue(appName, false);
+                }
+                rk2.Close();
+                rk.Close();
+                success = getAutoStartStatus() == start;
+            }
+            catch
+            {
+                success = false;
+            }
+            return success;
         }
-        private bool checkAutorunStatus () {
+        private bool getAutoStartStatus()
+        {
             string appPath = Application.ExecutablePath;
-            string appName = System.IO.Path.GetFileName (appPath);
-            Object obj = Registry.GetValue (@"HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run", appName, null);
-            if (obj != null) {
+            string appName = System.IO.Path.GetFileName(appPath);
+            object obj = Registry.GetValue(@"HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run", appName, null);
+            if (obj != null)
+            {
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
-        private void closeAutoStart () {
-            string appPath = Application.ExecutablePath;
-            string appName = System.IO.Path.GetFileName (appPath);
-            RegistryKey rk = Registry.LocalMachine;
-            RegistryKey rk2 = rk.CreateSubKey (@"Software\Microsoft\Windows\CurrentVersion\Run");
-            rk2.DeleteValue (appName, false);
-            rk2.Close ();
-            rk.Close ();
+
+        private void openAutoStart (object sender = null, System.Timers.ElapsedEventArgs e = null) {
+          setAutoStart(true);
         }
-        private void setAutoStart () {
-            string stmp = Assembly.GetExecutingAssembly ().Location;
-            stmp = stmp.Substring (0, stmp.LastIndexOf ('\\'));
-            string firstRunFile = stmp + @"\firstrun.ini";
+     
+      
+        private void createFirstRunFile () {
+            string firstRunFile = Assembly.GetExecutingAssembly ().Location;
+            firstRunFile = firstRunFile.Substring (0, firstRunFile.LastIndexOf ('\\'))+ @"\firstrun.ini";
             if (!File.Exists (firstRunFile)) {
                 FileStream NewText = File.Create (firstRunFile);
                 NewText.Close ();
@@ -374,7 +411,7 @@ namespace timesync {
         }
         private void setWebTimeSteps () {
             if (label4.InvokeRequired) {
-                label4.BeginInvoke (syncPending);
+                label4.BeginInvoke (invokeSyncStatusPending);
             } else {
                 setSyncStatusPending ();
             }
@@ -384,37 +421,34 @@ namespace timesync {
                 mTimeSpan = webtime.datetime - DateTime.Now;
                 isOnceSuccessGetInternetTime = true;
                 if (label2.InvokeRequired) {
-                    label2.BeginInvoke (mMyDelegateSuccess);
+                    label2.BeginInvoke (invokeWebTimeTextSuccess);
                 } else {
                     setWebTimeTextSuccess ();
                 }
 
-               
-            
-        
                 if (isSuccess) {
                     if (label4.InvokeRequired) {
-                        label4.BeginInvoke (syncSuccess);
+                        label4.BeginInvoke (invokeSyncSatusSuccess);
                     } else {
                         setSyncSatusSuccess ();
                     }
                 } else {
                     if (label4.InvokeRequired) {
-                        label4.BeginInvoke (syncError);
+                        label4.BeginInvoke (invokeSyncStatusError);
                     } else {
                         setSyncStatusError ();
                     }
                 }
             } else if (!isOnceSuccessGetInternetTime) {
                 if (label2.InvokeRequired) {
-                    label2.BeginInvoke (mMyDelegate);
+                    label2.BeginInvoke (invokeWebTimeTextError);
                 } else {
                     setWebTimeTextError ();
                 }
             }
             if (!webtime.status) {
                 if (label4.InvokeRequired) {
-                    label4.BeginInvoke (syncError);
+                    label4.BeginInvoke (invokeSyncStatusError);
                 } else {
                     setSyncStatusError ();
                 }
@@ -430,31 +464,32 @@ namespace timesync {
         {
             isDelay = false;
         }
-        private void setWebTimeAsync () {
-            isDelay = true;
-            Thread mThread = new Thread (new ThreadStart (setWebTimeSteps));
-            mThread.Start ();
-        }
         private void getWebTimeSteps () {
             WebTime webtime = getWebTime ();
             if (webtime.status) {
                 mTimeSpan =  webtime.datetime - DateTime.Now;
                 isOnceSuccessGetInternetTime = true;
                 if (label2.InvokeRequired) {
-                    label2.BeginInvoke (mMyDelegateSuccess);
+                    label2.BeginInvoke (invokeWebTimeTextSuccess);
                 } else {
                     setWebTimeTextSuccess ();
                 }
             } else if (!isOnceSuccessGetInternetTime) {
                 if (label2.InvokeRequired) {
-                    label2.BeginInvoke (mMyDelegate);
+                    label2.BeginInvoke (invokeWebTimeTextError);
                 } else {
                     setWebTimeTextError ();
                 }
             }
         }
-        private void getWebTimeAsync () {
-            Thread mThread = new Thread (new ThreadStart (getWebTimeSteps));
+        private void setWebTimeAsync (bool set = false) {
+            Thread mThread;
+            if(set){
+              isDelay = true;
+               mThread= new Thread (new ThreadStart (setWebTimeSteps));
+            } else {
+               mThread = new Thread (new ThreadStart (getWebTimeSteps));
+            }
             mThread.Start ();
         }
         private void button1_Click (object sender, EventArgs e) {
@@ -463,7 +498,7 @@ namespace timesync {
                 return;
             }
             setWebTimeTextLoading ();
-            setWebTimeAsync ();
+            setWebTimeAsync (true);
         }
         public struct WebTime {
             public DateTime datetime;
@@ -475,8 +510,8 @@ namespace timesync {
             string stmp = Assembly.GetExecutingAssembly().Location;
             stmp = stmp.Substring(0, stmp.LastIndexOf('\\'));
             INIClass ini = new INIClass(stmp + @"\config.ini");
-            bool isAutoSync = ini.IniReadValue("AUTOSYNC", "enable", "1") == "1" ? true : false;
-            isStartAutoSyncTimeOnce = ini.IniReadValue("AUTOSYNC", "startsync", "0") == "1" ? true : false;
+            bool isAutoSync = ini.IniReadValue("AUTOSYNC", "autoSyncCircle", "1") == "1" ? true : false;
+            isStartAutoSyncTimeOnce = ini.IniReadValue("AUTOSYNC", "autoSyncOnStart", "0") == "1" ? true : false;
             decimal syncInterval = int.Parse(ini.IniReadValue("AUTOSYNC", "interval", "5"));
             this.syncInterval = syncInterval;
             this.isAutoSync = isAutoSync;

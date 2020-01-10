@@ -13,23 +13,17 @@ namespace timesync {
             InitializeComponent ();
         }
         private void button2_Click (object sender, EventArgs e) {
-            this.Dispose ();
-            this.Close ();
+            Dispose ();
+            Close ();
         }
         private void button1_Click (object sender, EventArgs e) {
-            if (this.checkBox1.Checked) {
-                string stmp = Assembly.GetExecutingAssembly ().Location;
-                stmp = stmp.Substring (0, stmp.LastIndexOf ('\\'));
-                INIClass ini = new INIClass (stmp + @"\config.ini");
-                bool confirm = this.checkBox1.Checked;
-                if (confirm) {
-                    ini.IniWriteValue ("EXIT", "confirm", "0");
-                } else {
-                    ini.IniWriteValue ("EXIT", "confirm", "1");
-                }
+            if (checkBox1.Checked) {
+                string path = Assembly.GetExecutingAssembly ().Location;
+                path = path.Substring(0, path.LastIndexOf('\\')) + @"\config.ini";
+                new INIClass(path).IniWriteValue("EXIT", "exitConfirm", "0");
             }
-            this.Close ();
-            this.Dispose ();
+            Close ();
+            Dispose ();
             Application.ExitThread ();
         }
         private bool isEnterMenuPanel = false;

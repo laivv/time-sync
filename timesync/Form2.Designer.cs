@@ -68,7 +68,6 @@
             this.label1.Size = new System.Drawing.Size(71, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "时间同步1.1";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -171,7 +170,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(322, 205);
             this.panel4.TabIndex = 0;
-            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // pictureBox4
             // 

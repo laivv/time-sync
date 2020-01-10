@@ -38,23 +38,13 @@ namespace timesync {
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void panel3_MouseUp (object sender, MouseEventArgs e) {
             isMouseDown = false;
         }
         private void panel3_MouseMove (object sender, MouseEventArgs e) {
             if (isMouseDown && isEnterMenuPanel) {
                 Point MousePos = Control.MousePosition;
-                this.Location = new Point (LocationX + MousePos.X - MouseX, LocationY + MousePos.Y - MouseY);
+                Location = new Point (LocationX + MousePos.X - MouseX, LocationY + MousePos.Y - MouseY);
             }
         }
         private void pictureBox2_Click (object sender, EventArgs e) {

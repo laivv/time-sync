@@ -11,152 +11,107 @@ using Microsoft.Win32;
 namespace timesync {
     public partial class Form5 : Form {
         private Form1 parentForm;
+        private INIClass ini;
         public Form5 (Form1 parentForm) {
             this.parentForm = parentForm;
             InitializeComponent ();
+            initINI();
             renderView ();
         }
-        private void openAutoStart (object sender = null, System.Timers.ElapsedEventArgs e = null) {
+        private struct CONFIG
+        {
+            public bool autoStart;
+            public bool exitConfirm;
+            public bool autoSyncOnStart;
+            public bool autoSyncCircle;
+            public decimal interval;
+        }
+        private void initINI()
+        {
+            string path = Assembly.GetExecutingAssembly().Location;
+            path = path.Substring(0, path.LastIndexOf('\\')) + @"\config.ini";
+            INIClass ini = new INIClass(path);
+            this.ini = ini;
+        }
+        private CONFIG getConfig()
+        {
+            CONFIG config;
+            config.autoStart = getAutoStartStatus();
+            config.exitConfirm = ini.IniReadValue("EXIT", "exitConfirm", "1") == "1";
+            config.autoSyncOnStart = ini.IniReadValue("AUTOSYNC", "autoSyncOnStart", "0") == "0";
+            config.autoSyncCircle = ini.IniReadValue("AUTOSYNC", "autoSyncCircle", "1") == "1";
+            decimal interval = int.Parse(ini.IniReadValue("AUTOSYNC", "interval", "5"));
+            decimal max = numericUpDown1.Maximum;
+            decimal min = numericUpDown1.Minimum;
+            interval = interval > max ? max : interval;
+            interval = interval < min ? min : interval;
+            config.interval = interval;
+            return config;
+        }
+        private bool setAutoStart(bool start) {
             string appPath = Application.ExecutablePath;
             string appName = System.IO.Path.GetFileName (appPath);
+            bool success = true;
             try {
                 RegistryKey rk = Registry.LocalMachine;
                 RegistryKey rk2 = rk.CreateSubKey (@"Software\Microsoft\Windows\CurrentVersion\Run");
-                rk2.SetValue (appName, appPath + " -s");
+                if (start)
+                {
+                    rk2.SetValue(appName, appPath + " -s");
+                } else
+                {
+                    rk2.DeleteValue(appName, false);
+                }
                 rk2.Close ();
                 rk.Close ();
-            } catch { }
+                success = getAutoStartStatus() == start;
+            } catch {
+                success = false;
+            }
+            return success;
         }
-        private bool checkAutorunStatus () {
+        private bool getAutoStartStatus () {
             string appPath = Application.ExecutablePath;
             string appName = System.IO.Path.GetFileName (appPath);
-            Object obj = Registry.GetValue (@"HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run", appName, null);
+            object obj = Registry.GetValue (@"HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run", appName, null);
             if (obj != null) {
                 return true;
             } else {
                 return false;
             }
         }
-        private void closeAutoStart () {
-            string appPath = Application.ExecutablePath;
-            string appName = System.IO.Path.GetFileName (appPath);
-            RegistryKey rk = Registry.LocalMachine;
-            RegistryKey rk2 = rk.CreateSubKey (@"Software\Microsoft\Windows\CurrentVersion\Run");
-            rk2.DeleteValue (appName, false);
-            rk2.Close ();
-            rk.Close ();
-        }
-        private string INIReader () {
-            string stmp = Assembly.GetExecutingAssembly ().Location;
-            stmp = stmp.Substring (0, stmp.LastIndexOf ('\\'));
-            INIClass ini = new INIClass (stmp + @"\config.ini");
-            string isConfirm = ini.IniReadValue ("EXIT", "confirm", "1");
-            return isConfirm;
-        }
-        private string INIReader2 () {
-            string stmp = Assembly.GetExecutingAssembly ().Location;
-            stmp = stmp.Substring (0, stmp.LastIndexOf ('\\'));
-            INIClass ini = new INIClass (stmp + @"\config.ini");
-            string isConfirm = ini.IniReadValue ("AUTOSYNC", "startsync", "0");
-            return isConfirm;
-        }
-
-        private void readSyncConfig()
-        {
-            string stmp = Assembly.GetExecutingAssembly().Location;
-            stmp = stmp.Substring(0, stmp.LastIndexOf('\\'));
-            INIClass ini = new INIClass(stmp + @"\config.ini");
-            Boolean isAutoSync = ini.IniReadValue("AUTOSYNC", "enable", "1") == "1" ? true : false;
-            decimal interval = int.Parse(ini.IniReadValue("AUTOSYNC", "interval", "5"));
-            checkBox4.Checked = isAutoSync;
-            decimal max = numericUpDown1.Maximum;
-            decimal min = numericUpDown1.Minimum;
-            numericUpDown1.Enabled = isAutoSync;
-            if (interval >= min && interval <= max)
-            {
-                numericUpDown1.Value = interval;
-            }
-        }
         private void renderView () {
-            this.checkBox1.Checked = checkAutorunStatus();
-            this.checkBox2.Checked = INIReader() == "1" ? true : false;
-            this.checkBox3.Checked = INIReader2() == "1" ? true : false;
-            readSyncConfig();
+            CONFIG config = getConfig();
+            checkBox1.Checked = config.autoStart;
+            checkBox2.Checked = config.exitConfirm;
+            checkBox3.Checked = config.autoSyncOnStart;
+            checkBox4.Checked = config.autoSyncCircle;
+            numericUpDown1.Enabled = config.autoSyncCircle;
+            numericUpDown1.Value = config.interval;
         }
         private void button1_Click (object sender, EventArgs e) {
-            bool isSaved = true;
-            if (checkBox1.Checked) {
-                if (!checkAutorunStatus ()) {
-                    openAutoStart ();
-                    if (!checkAutorunStatus ()) {
-                        isSaved = false;
-                    }
-                }
-            } else {
-                if (checkAutorunStatus ()) {
-                    closeAutoStart ();
-                    if (checkAutorunStatus ()) {
-                        isSaved = false;
-                    }
-                }
-            }
-            string stmp = Assembly.GetExecutingAssembly ().Location;
-            stmp = stmp.Substring (0, stmp.LastIndexOf ('\\'));
-            INIClass ini = new INIClass (stmp + @"\config.ini");
-            bool confirm = checkBox2.Checked;
-            bool confirmStartSync = checkBox3.Checked;
-            if (confirm) {
-                ini.IniWriteValue ("EXIT", "confirm", "1");
-            } else {
-                ini.IniWriteValue ("EXIT", "confirm", "0");
-            }
-            if (confirmStartSync) {
-                ini.IniWriteValue ("AUTOSYNC", "startsync", "1");
-            } else {
-                ini.IniWriteValue ("AUTOSYNC", "startsync", "0");
-            }
-            saveSyncConfig();
-            saveIntervalConfig();
+            ini.IniWriteValue ("EXIT", "exitConfirm", checkBox2.Checked ? "1": "0");
+            ini.IniWriteValue ("AUTOSYNC", "autoSyncOnStart", checkBox3.Checked ? "1":"0");
+            ini.IniWriteValue("AUTOSYNC", "autoSyncCircle", checkBox4.Checked ? "1" : "0");
+            ini.IniWriteValue("AUTOSYNC", "interval", numericUpDown1.Value.ToString());
             parentForm.runTaskTimer(numericUpDown1.Value, checkBox4.Checked);
-            if (!isSaved) {
+            if (!setAutoStart(checkBox1.Checked)) {
                 renderView ();
                 MessageBox.Show ("部分设置保存失败！", "保存失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
             } else {
                 MessageBox.Show ("设置保存成功！", "保存成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close ();
-                this.Dispose ();
+                Close ();
+                Dispose ();
             }
         }
-        private void saveSyncConfig()
-        {
-            string stmp = Assembly.GetExecutingAssembly().Location;
-            stmp = stmp.Substring(0, stmp.LastIndexOf('\\'));
-            INIClass ini = new INIClass(stmp + @"\config.ini");
-            bool confirm = checkBox4.Checked;
-            if (confirm)
-            {
-                ini.IniWriteValue("AUTOSYNC", "enable", "1");
-            }
-            else
-            {
-                ini.IniWriteValue("AUTOSYNC", "enable", "0");
-            }
-        }
-        private void saveIntervalConfig()
-        {
-            string stmp = Assembly.GetExecutingAssembly().Location;
-            stmp = stmp.Substring(0, stmp.LastIndexOf('\\'));
-            INIClass ini = new INIClass(stmp + @"\config.ini");
-            string interval = numericUpDown1.Value.ToString();
-            ini.IniWriteValue("AUTOSYNC", "interval", interval);
-        }
+     
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             numericUpDown1.Enabled = checkBox1.Checked;
         }
         private void pictureBox2_Click (object sender, EventArgs e) {
-            this.Close ();
-            this.Dispose ();
+            Close ();
+            Dispose ();
         }
         private void checkBox1_Click (object sender, EventArgs e) {
             if (checkBox1.Checked == false) {
