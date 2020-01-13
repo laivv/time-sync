@@ -38,11 +38,11 @@
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label5 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -128,9 +128,9 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Location = new System.Drawing.Point(35, 47);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(192, 16);
+            this.checkBox2.Size = new System.Drawing.Size(162, 16);
             this.checkBox2.TabIndex = 17;
-            this.checkBox2.Text = "点击 [退出] 时显示询问对话框";
+            this.checkBox2.Text = "[退出] 时显示询问对话框";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // panel1
@@ -147,16 +147,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(269, 172);
             this.panel1.TabIndex = 18;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(35, 80);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(168, 16);
-            this.checkBox3.TabIndex = 18;
-            this.checkBox3.Text = "启动本程序时立即同步时间";
-            this.checkBox3.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -198,6 +188,17 @@
             this.checkBox4.TabIndex = 20;
             this.checkBox4.Text = "每隔";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(35, 80);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(168, 16);
+            this.checkBox3.TabIndex = 18;
+            this.checkBox3.Text = "启动本程序时立即同步时间";
+            this.checkBox3.UseVisualStyleBackColor = true;
             // 
             // Form5
             // 

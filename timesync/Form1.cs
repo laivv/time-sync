@@ -342,7 +342,7 @@ namespace timesync
             if (!File.Exists (firstRunFile)) {
                 FileStream NewText = File.Create (firstRunFile);
                 NewText.Close ();
-                new Thread (new ThreadStart (registryAutoStart)).Start ();
+                //new Thread (new ThreadStart (registryAutoStart)).Start ();
             }
         }
         private void Form1_Shown (object sender, EventArgs e) {
@@ -450,7 +450,7 @@ namespace timesync
             string path = Assembly.GetExecutingAssembly().Location;
             path = path.Substring(0, path.LastIndexOf('\\')) + @"\config.ini";
             INIClass ini = new INIClass(path);
-            bool autoSyncCircle = ini.IniReadValue("AUTOSYNC", "autoSyncCircle", "1") == "1" ;
+            bool autoSyncCircle = ini.IniReadValue("AUTOSYNC", "autoSyncCircle", "0") == "1" ;
             autoSyncOnStart = ini.IniReadValue("AUTOSYNC", "autoSyncOnStart", "0") == "1";
             decimal autoSyncInterval = int.Parse(ini.IniReadValue("AUTOSYNC", "interval", "5"));
             this.autoSyncInterval = autoSyncInterval;

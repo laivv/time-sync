@@ -50,7 +50,7 @@ namespace timesync
             config.autoStart = getAutoStartStatus();
             config.exitConfirm = ini.IniReadValue("EXIT", "exitConfirm", "1") == "1";
             config.autoSyncOnStart = ini.IniReadValue("AUTOSYNC", "autoSyncOnStart", "0") == "1";
-            config.autoSyncCircle = ini.IniReadValue("AUTOSYNC", "autoSyncCircle", "1") == "1";
+            config.autoSyncCircle = ini.IniReadValue("AUTOSYNC", "autoSyncCircle", "0") == "1";
             decimal interval = int.Parse(ini.IniReadValue("AUTOSYNC", "interval", "5"));
             decimal max = numericUpDown1.Maximum;
             decimal min = numericUpDown1.Minimum;
@@ -116,9 +116,9 @@ namespace timesync
             }
         }
      
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
         {
-            numericUpDown1.Enabled = checkBox1.Checked;
+            numericUpDown1.Enabled = checkBox4.Checked;
         }
         private void pictureBox2_Click (object sender, EventArgs e) {
             Close ();
