@@ -8,29 +8,26 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using Microsoft.Win32;
-namespace timesync {
+namespace timesync
+{
     public partial class Form1 : Form {
         // 是否后台启动模式
         private bool isStartOnBackEndMode = false;
         // 是否启动后立即同步一次时间
         private bool isStartAutoSyncTimeOnce = false;
         // 是否至少成功一次请求网络时间
-        private bool isOnceSuccessGetInternetTime = false; 
+        private bool fetchWebTimeOnceSuccess = false; 
         // 是否第一次最小化
         private bool isFirstMinWindow = true;
         // 同步间隔 - 分钟
         private decimal syncInterval;
         // 是否每隔指定周期自动同步
-        private bool isAutoSync = false;
-        // 是否要刷新显示本机时间
-        private bool isDelay = false;
+        private bool autoSyncCircle = false;
+        // 是否在同步中
+        private bool isFetching = false;
+        // 标准时间和本地时间差
         private TimeSpan mTimeSpan;
-        public delegate void Delegator ();
-        public Delegator invokeWebTimeTextError;
-        public Delegator invokeWebTimeTextSuccess;
-        public Delegator invokeSyncSatusSuccess;
-        public Delegator invokeSyncStatusError;
-        public Delegator invokeSyncStatusPending;
+        public delegate void AsyncDelegate (SyncType type, State state);
         private System.Timers.Timer taskTimer = new System.Timers.Timer ();
         private string[] ntps = new string[] {
             "ntp1.aliyun.com",
@@ -51,26 +48,14 @@ namespace timesync {
             init (args);
         }
         private void init (string[] args) {
-            readSyncConfig();
-            invokeWebTimeTextError = new Delegator (setWebTimeTextError);
-            invokeWebTimeTextSuccess = new Delegator (setWebTimeTextSuccess);
-            invokeSyncSatusSuccess = new Delegator (setSyncSatusSuccess);
-            invokeSyncStatusError = new Delegator (setSyncStatusError);
-            invokeSyncStatusPending = new Delegator (setSyncStatusPending);
+            readConfig();
             startTimer ();
-            if (isStartAutoSyncTimeOnce) {
-                setWebTimeAsync (true);
-            } else {
-                setWebTimeAsync ();
-            }
+            setWebTimeAsync (isStartAutoSyncTimeOnce);
             isStartOnBackEndMode = args.Length > 0;
             createFirstRunFile ();
             initTaskTimer ();
-            runTaskTimer(this.syncInterval, this.isAutoSync);
-            if (!isDelay)
-            {
-                label4.Text = DateTime.Now.ToString ("yyyy-MM-dd HH:mm:ss");
-            }
+            runTaskTimer(this.syncInterval, this.autoSyncCircle);
+            renderTime();
 
         }
         public struct SYSTEMTIME {
@@ -116,80 +101,88 @@ namespace timesync {
             taskTimer.Interval = (double) (syncInterval * 1000 * 60);
             taskTimer.Enabled = enable;
         }
-        public void setSyncSatusSuccess () {
-            label4.Text = "同步成功";
-            label3.ForeColor = Color.FromArgb(0, 192, 0);
-            label4.ForeColor = Color.FromArgb (0, 192, 0);
-        }
-        public void setSyncStatusError () {
-            label4.Text = "同步失败";
-            label3.ForeColor = Color.Red;
-            label4.ForeColor = Color.Red;
-        }
-        public void setSyncStatusPending () {
-            label4.Text = "同步中...";
-            label3.ForeColor = Color.Gray;
-            label4.ForeColor = Color.Gray;
-          
-        }
-        public void setWebTimeTextError () {
-            label2.Text = "获取失败";
-            label2.ForeColor = Color.Red;
-            label1.ForeColor = Color.Red;
-        }
-
-        public enum FetchState {
+        public enum State
+        {
             pending = 1,
             success = 2,
             error = 0
         }
-        public void setFetchState(FetchState state)
+        public enum SyncType
         {
-            if(state == FetchState.pending)
-            {
-                label1.ForeColor = Color.Gray;
-                label2.ForeColor = Color.Gray;
-                label2.Text = "获取中...";
-            }
-            else if(state == FetchState.success)
-            {
-                label1.ForeColor = Color.FromArgb(0, 192, 0);
-                label2.ForeColor = Color.FromArgb(0, 192, 0);
-            }
-            else if(state == FetchState.error)
-            {
-                label2.Text = "获取失败";
-                label2.ForeColor = Color.Red;
-                label1.ForeColor = Color.Red;
-            }
+            get = 0,
+            set = 1
         }
-        public void setWebTimeTextSuccess () {
-            label1.ForeColor = Color.FromArgb (0, 192, 0);
-            label2.ForeColor = Color.FromArgb (0, 192, 0);
-        }
-        public void setWebTimeTextLoading () {
-            if (!isOnceSuccessGetInternetTime)
+        public void setState (SyncType type, State state) {
+            if (SyncType.set == type)
             {
-                label1.ForeColor = Color.Gray;
-                label2.ForeColor = Color.Gray;
-                label2.Text = "获取中...";
+                if (State.success == state)
+                {
+                    label4.Text = "同步成功";
+                    label3.ForeColor = Color.FromArgb(0, 192, 0);
+                    label4.ForeColor = Color.FromArgb(0, 192, 0);
+                }
+                else if (State.error == state)
+                {
+                    label4.Text = "同步失败";
+                    label3.ForeColor = Color.Red;
+                    label4.ForeColor = Color.Red;
+                }
+                else if (State.pending == state)
+                {
+                    label4.Text = "同步中...";
+                    label3.ForeColor = Color.Gray;
+                    label4.ForeColor = Color.Gray;
+                }
             }
+            else if (SyncType.get == type)
+            {
+                if (state == State.success || fetchWebTimeOnceSuccess)
+                {
+                    label1.ForeColor = Color.FromArgb(0, 192, 0);
+                    label2.ForeColor = Color.FromArgb(0, 192, 0);
+                }
+                else if (state == State.pending)
+                {
+                    label1.ForeColor = Color.Gray;
+                    label2.ForeColor = Color.Gray;
+                    label2.Text = "获取中...";
+                }
+
+                else if (state == State.error)
+                {
+                    label2.Text = "获取失败";
+                    label2.ForeColor = Color.Red;
+                    label1.ForeColor = Color.Red;
+                }
+            }
+           
+           
         }
     
+        public void setStateProxy(SyncType type,State state,Control control)
+        {
+            if (control.InvokeRequired)
+            {
+                control.BeginInvoke(new AsyncDelegate(setState), new object[] {type,state });
+            } else
+            {
+                setState(type, state);
+            }
+        }
         private void startTimer () {
             System.Timers.Timer timer = new System.Timers.Timer ();
             timer.Interval = 1000;
             timer.AutoReset = true;
-            timer.Elapsed += new System.Timers.ElapsedEventHandler (refreshTime);
+            timer.Elapsed += new System.Timers.ElapsedEventHandler (renderTime);
             timer.SynchronizingObject = this;
             timer.Enabled = true;
         }
-        private void refreshTime (object sender, System.Timers.ElapsedEventArgs e) {
-            if (!isDelay)
+        private void renderTime (object sender = null, System.Timers.ElapsedEventArgs e = null) {
+            if (!isFetching)
             {
                 label4.Text = DateTime.Now.ToString ("yyyy-MM-dd HH:mm:ss");
             }
-            if (isOnceSuccessGetInternetTime) {
+            if (fetchWebTimeOnceSuccess) {
                 label2.Text = DateTime.Now.AddSeconds (mTimeSpan.TotalSeconds).ToString ("yyyy-MM-dd HH:mm:ss");
             }
         }
@@ -217,22 +210,23 @@ namespace timesync {
             }
         }
         private void ToolStripMenuItem1_Click (object sender, EventArgs e) {
-            string stmp = Assembly.GetExecutingAssembly ().Location;
-            stmp = stmp.Substring (0, stmp.LastIndexOf ('\\'));
-            INIClass ini = new INIClass (stmp + @"\config.ini");
+            string path = Assembly.GetExecutingAssembly ().Location;
+            path = path.Substring(0, path.LastIndexOf('\\')) + @"\config.ini";
+            INIClass ini = new INIClass (path);
+            bool confirm = true;
             if (ini.ExistINIFile ()) {
-                string isConfirm = ini.IniReadValue ("EXIT", "exitConfirm", "1");
-                if (isConfirm == "1") {
-                    Form3 exitForm = new Form3 ();
-                    exitForm.ShowDialog (this);
-                } else {
-                    this.Dispose ();
-                    this.Close ();
-                    Application.Exit ();
-                }
-            } else {
-                Form3 exitForm = new Form3 ();
-                exitForm.ShowDialog (this);
+                confirm = ini.IniReadValue ("EXIT", "exitConfirm", "1") == "1";
+            }
+            if (confirm)
+            {
+                Form3 exitForm = new Form3();
+                exitForm.ShowDialog(this);
+            }
+            else
+            {
+                Dispose();
+                Close();
+                Application.Exit();
             }
         }
         private void ToolStripMenuItem_Click (object sender, EventArgs e) {
@@ -331,10 +325,9 @@ namespace timesync {
             }
         }
 
-        private void openAutoStart (object sender = null, System.Timers.ElapsedEventArgs e = null) {
+        private void registryAutoStart () {
           setAutoStart(true);
         }
-     
       
         private void createFirstRunFile () {
             string firstRunFile = Assembly.GetExecutingAssembly ().Location;
@@ -342,16 +335,8 @@ namespace timesync {
             if (!File.Exists (firstRunFile)) {
                 FileStream NewText = File.Create (firstRunFile);
                 NewText.Close ();
-                new Thread (new ThreadStart (registerAutoStart)).Start ();
+                new Thread (new ThreadStart (registryAutoStart)).Start ();
             }
-        }
-        private void registerAutoStart () {
-            System.Timers.Timer timer = new System.Timers.Timer ();
-            timer.AutoReset = false;
-            timer.Interval = 10 * 1000;
-            timer.Elapsed += new System.Timers.ElapsedEventHandler (openAutoStart);
-            timer.SynchronizingObject = this;
-            timer.Enabled = true;
         }
         private void Form1_Shown (object sender, EventArgs e) {
             if (isStartOnBackEndMode) {
@@ -410,82 +395,39 @@ namespace timesync {
                 ((x & 0xff000000) >> 24));
         }
         private void setWebTimeSteps () {
-            if (label4.InvokeRequired) {
-                label4.BeginInvoke (invokeSyncStatusPending);
-            } else {
-                setSyncStatusPending ();
-            }
+            setStateProxy(SyncType.set, State.pending, label4);
             WebTime webtime = getWebTime ();
+            bool success = false;
             if (webtime.status) {
-                bool isSuccess = setTime (webtime.datetime);
+                success = setTime (webtime.datetime);
                 mTimeSpan = webtime.datetime - DateTime.Now;
-                isOnceSuccessGetInternetTime = true;
-                if (label2.InvokeRequired) {
-                    label2.BeginInvoke (invokeWebTimeTextSuccess);
-                } else {
-                    setWebTimeTextSuccess ();
-                }
-
-                if (isSuccess) {
-                    if (label4.InvokeRequired) {
-                        label4.BeginInvoke (invokeSyncSatusSuccess);
-                    } else {
-                        setSyncSatusSuccess ();
-                    }
-                } else {
-                    if (label4.InvokeRequired) {
-                        label4.BeginInvoke (invokeSyncStatusError);
-                    } else {
-                        setSyncStatusError ();
-                    }
-                }
-            } else if (!isOnceSuccessGetInternetTime) {
-                if (label2.InvokeRequired) {
-                    label2.BeginInvoke (invokeWebTimeTextError);
-                } else {
-                    setWebTimeTextError ();
-                }
+                fetchWebTimeOnceSuccess = true;
             }
-            if (!webtime.status) {
-                if (label4.InvokeRequired) {
-                    label4.BeginInvoke (invokeSyncStatusError);
-                } else {
-                    setSyncStatusError ();
-                }
-            }
-             System.Timers.Timer time = new System.Timers.Timer();
-                time.AutoReset = false;
-                time.Interval = 500;
-                time.Elapsed += new System.Timers.ElapsedEventHandler(setDelay);
-                time.SynchronizingObject = this;
-                time.Enabled = true;
+            setStateProxy(SyncType.get, webtime.status ? State.success : State.error, label2);
+            setStateProxy(SyncType.set, success ? State.success : State.error, label4);
+            System.Timers.Timer time = new System.Timers.Timer();
+            time.AutoReset = false;
+            time.Interval = 500;
+            time.Elapsed += new System.Timers.ElapsedEventHandler(setDelay);
+            time.SynchronizingObject = this;
+            time.Enabled = true;
         }
         private void setDelay(object sender, System.Timers.ElapsedEventArgs e)
         {
-            isDelay = false;
+            isFetching = false;
         }
         private void getWebTimeSteps () {
             WebTime webtime = getWebTime ();
             if (webtime.status) {
                 mTimeSpan =  webtime.datetime - DateTime.Now;
-                isOnceSuccessGetInternetTime = true;
-                if (label2.InvokeRequired) {
-                    label2.BeginInvoke (invokeWebTimeTextSuccess);
-                } else {
-                    setWebTimeTextSuccess ();
-                }
-            } else if (!isOnceSuccessGetInternetTime) {
-                if (label2.InvokeRequired) {
-                    label2.BeginInvoke (invokeWebTimeTextError);
-                } else {
-                    setWebTimeTextError ();
-                }
+                fetchWebTimeOnceSuccess = true;
             }
+            setStateProxy(SyncType.get, webtime.status ? State.success : State.error, label2);
         }
         private void setWebTimeAsync (bool set = false) {
             Thread mThread;
             if(set){
-              isDelay = true;
+               isFetching = true;
                mThread= new Thread (new ThreadStart (setWebTimeSteps));
             } else {
                mThread = new Thread (new ThreadStart (getWebTimeSteps));
@@ -493,11 +435,10 @@ namespace timesync {
             mThread.Start ();
         }
         private void button1_Click (object sender, EventArgs e) {
-            if (isDelay)
+            if (isFetching)
             {
                 return;
             }
-            setWebTimeTextLoading ();
             setWebTimeAsync (true);
         }
         public struct WebTime {
@@ -505,16 +446,16 @@ namespace timesync {
             public bool status;
         }
 
-        private void readSyncConfig()
+        private void readConfig()
         {
-            string stmp = Assembly.GetExecutingAssembly().Location;
-            stmp = stmp.Substring(0, stmp.LastIndexOf('\\'));
-            INIClass ini = new INIClass(stmp + @"\config.ini");
-            bool isAutoSync = ini.IniReadValue("AUTOSYNC", "autoSyncCircle", "1") == "1" ? true : false;
-            isStartAutoSyncTimeOnce = ini.IniReadValue("AUTOSYNC", "autoSyncOnStart", "0") == "1" ? true : false;
+            string path = Assembly.GetExecutingAssembly().Location;
+            path = path.Substring(0, path.LastIndexOf('\\')) + @"\config.ini";
+            INIClass ini = new INIClass(path);
+            bool autoSyncCircle = ini.IniReadValue("AUTOSYNC", "autoSyncCircle", "1") == "1" ;
+            isStartAutoSyncTimeOnce = ini.IniReadValue("AUTOSYNC", "autoSyncOnStart", "0") == "1";
             decimal syncInterval = int.Parse(ini.IniReadValue("AUTOSYNC", "interval", "5"));
             this.syncInterval = syncInterval;
-            this.isAutoSync = isAutoSync;
+            this.autoSyncCircle = autoSyncCircle;
 
         }
     }
