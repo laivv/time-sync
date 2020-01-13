@@ -19,7 +19,6 @@ namespace timesync {
         static void Main (string[] args) {
             bool runable = false;
             System.Threading.Mutex mutex = new System.Threading.Mutex(true, "lingluo-time-sync-2020-01-08-win32", out runable);
-
             if (!runable)
             {
                 try

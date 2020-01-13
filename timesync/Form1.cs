@@ -273,8 +273,8 @@ namespace timesync
                 //显示启动界面
                 //Form4 wellcome = new Form4();
                 //wellcome.ShowDialog();
-                WriteHandle("timesync-mapping", Handle);
             }
+            WriteHandle("timesync-mapping", Handle);
         }
         private void WriteHandle(string key, IntPtr handler)
         {
