@@ -27,6 +27,17 @@ namespace timesync
         private bool isFetching = false;
         // 标准时间和本地时间差
         private TimeSpan mTimeSpan;
+        public enum State
+        {
+            pending = 1,
+            success = 2,
+            error = 0
+        }
+        public enum SyncType
+        {
+            get = 0,
+            set = 1
+        }
         public delegate void AsyncDelegate (SyncType type, State state);
         private System.Timers.Timer taskTimer = new System.Timers.Timer ();
         private string[] ntps = new string[] {
@@ -102,17 +113,7 @@ namespace timesync
             taskTimer.Interval = (double) (autoSyncInterval * 1000 * 60);
             taskTimer.Enabled = enable;
         }
-        public enum State
-        {
-            pending = 1,
-            success = 2,
-            error = 0
-        }
-        public enum SyncType
-        {
-            get = 0,
-            set = 1
-        }
+      
         public void setState (SyncType type, State state) {
             if (SyncType.set == type)
             {
