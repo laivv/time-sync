@@ -273,9 +273,22 @@ namespace timesync
                 //显示启动界面
                 //Form4 wellcome = new Form4();
                 //wellcome.ShowDialog();
+                WriteHandle("timesync-mapping", Handle);
             }
         }
-  
+        private void WriteHandle(string key, IntPtr handler)
+        {
+            System.IO.MemoryMappedFiles.MemoryMappedFile mmf = System.IO.MemoryMappedFiles.MemoryMappedFile.CreateOrOpen(key, 1024000);
+
+            using (System.IO.MemoryMappedFiles.MemoryMappedViewStream stream = mmf.CreateViewStream())
+            {
+                using (System.IO.MemoryMappedFiles.MemoryMappedViewAccessor accessor = mmf.CreateViewAccessor())
+                {
+                    accessor.Write(0, ref handler);
+                }
+            }
+        }
+
 
         private bool setAutoStart(bool start)
         {
