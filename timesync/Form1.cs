@@ -12,15 +12,15 @@ namespace timesync
 {
     public partial class Form1 : Form {
         // 是否后台启动模式
-        private bool isStartOnBackEndMode = false;
+        private bool startOnBackEndMode = false;
         // 是否启动后立即同步一次时间
-        private bool isStartAutoSyncTimeOnce = false;
+        private bool autoSyncOnStart = false;
         // 是否至少成功一次请求网络时间
         private bool fetchWebTimeOnceSuccess = false; 
         // 是否第一次最小化
         private bool isFirstMinWindow = true;
         // 同步间隔 - 分钟
-        private decimal syncInterval;
+        private decimal autoSyncInterval;
         // 是否每隔指定周期自动同步
         private bool autoSyncCircle = false;
         // 是否在同步中
@@ -43,6 +43,7 @@ namespace timesync
             "cn.ntp.org.cn"
         };
         private int nptIndex = 0;
+
         public Form1 (string[] args) {
             InitializeComponent ();
             init (args);
@@ -50,11 +51,11 @@ namespace timesync
         private void init (string[] args) {
             readConfig();
             startTimer ();
-            setWebTimeAsync (isStartAutoSyncTimeOnce);
-            isStartOnBackEndMode = args.Length > 0;
+            setWebTimeAsync (autoSyncOnStart);
+            startOnBackEndMode = args.Length > 0;
             createFirstRunFile ();
             initTaskTimer ();
-            runTaskTimer(this.syncInterval, this.autoSyncCircle);
+            runTaskTimer(autoSyncInterval,autoSyncCircle);
             renderTime();
 
         }
@@ -97,8 +98,8 @@ namespace timesync
         private void taskSyncTime (object sender, System.Timers.ElapsedEventArgs e) {
             setWebTimeAsync (true);
         }
-        public void runTaskTimer (decimal syncInterval,bool enable) {
-            taskTimer.Interval = (double) (syncInterval * 1000 * 60);
+        public void runTaskTimer (decimal autoSyncInterval,bool enable) {
+            taskTimer.Interval = (double) (autoSyncInterval * 1000 * 60);
             taskTimer.Enabled = enable;
         }
         public enum State
@@ -155,10 +156,7 @@ namespace timesync
                     label1.ForeColor = Color.Red;
                 }
             }
-           
-           
         }
-    
         public void setStateProxy(SyncType type,State state,Control control)
         {
             if (control.InvokeRequired)
@@ -186,7 +184,6 @@ namespace timesync
                 label2.Text = DateTime.Now.AddSeconds (mTimeSpan.TotalSeconds).ToString ("yyyy-MM-dd HH:mm:ss");
             }
         }
-     
         private void minWindow () {
             this.Hide ();
             if (isFirstMinWindow) {
@@ -217,21 +214,17 @@ namespace timesync
             if (ini.ExistINIFile ()) {
                 confirm = ini.IniReadValue ("EXIT", "exitConfirm", "1") == "1";
             }
-            if (confirm)
-            {
-                Form3 exitForm = new Form3();
-                exitForm.ShowDialog(this);
+            if (confirm){
+                Form3.Open(this);
             }
-            else
-            {
+            else {
                 Dispose();
                 Close();
                 Application.Exit();
             }
         }
         private void ToolStripMenuItem_Click (object sender, EventArgs e) {
-            Form2 childForm = new Form2 ();
-            childForm.Show ();
+            Form2.Open();
         }
         private void ToolStripMenuItem2_Click (object sender, EventArgs e) {
             showWindow ();
@@ -275,7 +268,7 @@ namespace timesync
             }
         }
         private void Form1_Load (object sender, EventArgs e) {
-            if (!isStartOnBackEndMode) {
+            if (!startOnBackEndMode) {
                 //显示启动界面
                 //Form4 wellcome = new Form4();
                 //wellcome.ShowDialog();
@@ -339,13 +332,12 @@ namespace timesync
             }
         }
         private void Form1_Shown (object sender, EventArgs e) {
-            if (isStartOnBackEndMode) {
+            if (startOnBackEndMode) {
                 this.Hide ();
             }
         }
         private void ToolStripMenuItem_Click_Setting (object sender, EventArgs e) {
-            Form5 setting = new Form5 (this);
-            setting.Show ();
+            Form5.Open(this);
         }
         public WebTime getWebTime () {
             WebTime webtime;
@@ -409,6 +401,7 @@ namespace timesync
         }
      
         private void getWebTimeSteps () {
+            setStateProxy(SyncType.get, State.pending, label2);
             WebTime webtime = getWebTime ();
             if (webtime.status) {
                 mTimeSpan =  webtime.datetime - DateTime.Now;
@@ -444,11 +437,10 @@ namespace timesync
             path = path.Substring(0, path.LastIndexOf('\\')) + @"\config.ini";
             INIClass ini = new INIClass(path);
             bool autoSyncCircle = ini.IniReadValue("AUTOSYNC", "autoSyncCircle", "1") == "1" ;
-            isStartAutoSyncTimeOnce = ini.IniReadValue("AUTOSYNC", "autoSyncOnStart", "0") == "1";
-            decimal syncInterval = int.Parse(ini.IniReadValue("AUTOSYNC", "interval", "5"));
-            this.syncInterval = syncInterval;
+            autoSyncOnStart = ini.IniReadValue("AUTOSYNC", "autoSyncOnStart", "0") == "1";
+            decimal autoSyncInterval = int.Parse(ini.IniReadValue("AUTOSYNC", "interval", "5"));
+            this.autoSyncInterval = autoSyncInterval;
             this.autoSyncCircle = autoSyncCircle;
-
         }
     }
 }

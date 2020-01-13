@@ -14,6 +14,21 @@ namespace timesync
             initINI();
             renderView ();
         }
+        public static Form5 instance;
+        public static void Open(Form1 parentForm)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form == instance)
+                {
+                    form.Activate();
+                    form.WindowState = FormWindowState.Normal;
+                    return;
+                }
+            }
+            instance = new Form5(parentForm);
+            instance.Show();
+        }
         private struct CONFIG
         {
             public bool autoStart;
@@ -91,7 +106,7 @@ namespace timesync
             ini.IniWriteValue("AUTOSYNC", "autoSyncCircle", checkBox4.Checked ? "1" : "0");
             ini.IniWriteValue("AUTOSYNC", "interval", numericUpDown1.Value.ToString());
             parentForm.runTaskTimer(numericUpDown1.Value, checkBox4.Checked);
-            if (!setAutoStart(checkBox1.Checked)) {
+            if (getAutoStartStatus()!= checkBox1.Checked && !setAutoStart(checkBox1.Checked)) {
                 renderView ();
                 MessageBox.Show ("部分设置保存失败！", "保存失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
             } else {

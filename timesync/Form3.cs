@@ -8,6 +8,21 @@ namespace timesync
         public Form3 () {
             InitializeComponent ();
         }
+        public static Form3 instance;
+        public static void Open(Form1 parentForm)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form == instance)
+                {
+                    form.Activate();
+                    form.WindowState = FormWindowState.Normal;
+                    return;
+                }
+            }
+            instance = new Form3();
+            instance.ShowDialog(parentForm);
+        }
         private void button2_Click (object sender, EventArgs e) {
             Dispose ();
             Close ();

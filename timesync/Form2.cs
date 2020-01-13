@@ -7,6 +7,22 @@ namespace timesync
         public Form2 () {
             InitializeComponent ();
         }
+
+        public static Form2 instance;
+        public static void Open()
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form == instance)
+                {
+                    form.Activate();
+                    form.WindowState = FormWindowState.Normal;
+                    return;
+                }
+            }
+            instance = new Form2();
+            instance.Show();
+        }
         private void linkLabel1_LinkClicked (object sender, LinkLabelLinkClickedEventArgs e) {
             System.Diagnostics.Process.Start ("http://www.ilaiv.com/timesync?v=1.1");
         }
