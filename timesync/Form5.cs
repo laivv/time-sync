@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
-namespace timesync {
+namespace timesync
+{
     public partial class Form5 : Form {
         private Form1 parentForm;
         private INIClass ini;
@@ -38,7 +34,7 @@ namespace timesync {
             CONFIG config;
             config.autoStart = getAutoStartStatus();
             config.exitConfirm = ini.IniReadValue("EXIT", "exitConfirm", "1") == "1";
-            config.autoSyncOnStart = ini.IniReadValue("AUTOSYNC", "autoSyncOnStart", "0") == "0";
+            config.autoSyncOnStart = ini.IniReadValue("AUTOSYNC", "autoSyncOnStart", "0") == "1";
             config.autoSyncCircle = ini.IniReadValue("AUTOSYNC", "autoSyncCircle", "1") == "1";
             decimal interval = int.Parse(ini.IniReadValue("AUTOSYNC", "interval", "5"));
             decimal max = numericUpDown1.Maximum;

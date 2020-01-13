@@ -405,17 +405,9 @@ namespace timesync
             }
             setStateProxy(SyncType.get, webtime.status ? State.success : State.error, label2);
             setStateProxy(SyncType.set, success ? State.success : State.error, label4);
-            System.Timers.Timer time = new System.Timers.Timer();
-            time.AutoReset = false;
-            time.Interval = 500;
-            time.Elapsed += new System.Timers.ElapsedEventHandler(setDelay);
-            time.SynchronizingObject = this;
-            time.Enabled = true;
-        }
-        private void setDelay(object sender, System.Timers.ElapsedEventArgs e)
-        {
             isFetching = false;
         }
+     
         private void getWebTimeSteps () {
             WebTime webtime = getWebTime ();
             if (webtime.status) {
