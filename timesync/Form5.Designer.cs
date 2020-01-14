@@ -107,9 +107,9 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(35, 13);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(72, 16);
+            this.checkBox1.Size = new System.Drawing.Size(132, 16);
             this.checkBox1.TabIndex = 15;
-            this.checkBox1.Text = "开机启动";
+            this.checkBox1.Text = "开机时自动同步时间";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.Click += new System.EventHandler(this.checkBox1_Click);
             // 
@@ -156,6 +156,7 @@
             this.label5.Size = new System.Drawing.Size(77, 12);
             this.label5.TabIndex = 22;
             this.label5.Text = "分钟同步一次";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // numericUpDown1
             // 

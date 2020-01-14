@@ -26,9 +26,11 @@ namespace timesync {
                     IntPtr handle = getHandle("timesync-mapping");
                     ShowWindowAsync(handle, 1);
                     SetForegroundWindow(handle);
-                    return;
                 }
-                catch (Exception e){ }
+                catch (Exception e){
+                    MessageBox.Show("程序已在运行中", "提示");
+                }
+                return;
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -62,8 +62,8 @@ namespace timesync
         private void init (string[] args) {
             readConfig();
             startTimer ();
-            setWebTimeAsync (autoSyncOnStart);
             startOnBackEndMode = args.Length > 0;
+            setWebTimeAsync(autoSyncOnStart || startOnBackEndMode);
             createFirstRunFile ();
             initTaskTimer ();
             runTaskTimer(autoSyncInterval,autoSyncCircle);

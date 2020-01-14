@@ -108,9 +108,9 @@ namespace timesync
             parentForm.runTaskTimer(numericUpDown1.Value, checkBox4.Checked);
             if (getAutoStartStatus()!= checkBox1.Checked && !setAutoStart(checkBox1.Checked)) {
                 renderView ();
-                MessageBox.Show ("部分设置保存失败！", "保存失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show ("设置开机自动同步时间失败", "警告", MessageBoxButtons.OK, MessageBoxIcon.Error);
             } else {
-                MessageBox.Show ("设置保存成功！", "保存成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show ("设置保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close ();
                 Dispose ();
             }
@@ -125,8 +125,8 @@ namespace timesync
             Dispose ();
         }
         private void checkBox1_Click (object sender, EventArgs e) {
-            if (checkBox1.Checked == false) {
-                MessageBox.Show ("取消开机启动将不能在开机时同步时间！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if (!checkBox1.Checked) {
+                MessageBox.Show ("取消此项将不能在开机时同步时间", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         private bool isEnterMenuPanel = false;
@@ -138,6 +138,12 @@ namespace timesync
         private void panel3_MouseLeave (object sender, EventArgs e) {
             isEnterMenuPanel = false;
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            checkBox4.Checked = !checkBox4.Checked;
+        }
+
         private void panel3_MouseDown (object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left) {
                 isMouseDown = true;
