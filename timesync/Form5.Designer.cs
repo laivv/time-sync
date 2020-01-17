@@ -111,7 +111,6 @@
             this.checkBox1.TabIndex = 15;
             this.checkBox1.Text = "开机时自动同步时间";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.Click += new System.EventHandler(this.checkBox1_Click);
             // 
             // button1
             // 
@@ -128,9 +127,9 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Location = new System.Drawing.Point(35, 47);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(162, 16);
+            this.checkBox2.Size = new System.Drawing.Size(144, 16);
             this.checkBox2.TabIndex = 17;
-            this.checkBox2.Text = "[退出] 时显示询问对话框";
+            this.checkBox2.Text = "退出时显示询问对话框";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // panel1

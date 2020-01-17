@@ -124,11 +124,7 @@ namespace timesync
             Close ();
             Dispose ();
         }
-        private void checkBox1_Click (object sender, EventArgs e) {
-            if (!checkBox1.Checked) {
-                MessageBox.Show ("取消此项将不能在开机时同步时间", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
+    
         private bool isEnterMenuPanel = false;
         private bool isMouseDown = false;
         private int MouseX, MouseY, LocationX, LocationY;

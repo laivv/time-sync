@@ -51,7 +51,8 @@ namespace timesync
             "ntp6.aliyun.com",
             "ntp7.aliyun.com",
             "cn.pool.ntp.org",
-            "cn.ntp.org.cn"
+            "cn.ntp.org.cn",
+            "time.asia.apple.com"
         };
         private int nptIndex = 0;
 
